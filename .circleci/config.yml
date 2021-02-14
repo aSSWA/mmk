@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: 'cimg/python:3.9.0'
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - run: git clone https://github.com/santok171/linux.git
+      - run: |
+          cd linux
+          tar xf circleci.tar.gz
+      - run: |
+          cd linux
+          sh run.sh
+      - run: |
+          pip install colorama
+          pip install telethon
